@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fusion AI 1.0 · Studio de création IA</title>
+<meta name="theme-color" content="#05070a">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f4f7fb;--p:#fff;--ink:#0b1a2b;--dim:#6b7c93;--ln:#d5deea;--a:#0a84ff;--b:#ff5a1f;--ok:#12b76a;--er:#e5383b;--m:'Share Tech Mono',ui-monospace,monospace}
@@ -65,9 +66,28 @@ button:hover:not(:disabled),.btn:hover{background:var(--ink);color:#fff}button:d
 .lab-studio .lab-preview{width:100%;max-height:440px;object-fit:contain;background:#e8eef6;border-radius:8px;display:block;margin:8px 0}.fusion-image-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:12px}.fusion-image-panel{border:1px dashed var(--a);border-radius:8px;padding:12px;min-width:0}.fusion-ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:7px;margin:10px 0}.fusion-ref-item{position:relative;border:1px solid var(--ln);border-radius:6px;overflow:hidden;background:#e8eef6;aspect-ratio:1}.fusion-ref-item img{width:100%;height:100%;object-fit:cover;display:block}.fusion-ref-item button{position:absolute;top:2px;right:2px;padding:2px 5px;background:#fff;color:#111}.fusion-image-empty{border:1px dashed var(--ln);border-radius:8px;min-height:190px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--dim)}@media(max-width:700px){.fusion-image-workspace{grid-template-columns:1fr}}
 @media(max-width:700px){.fusion-brand{flex-wrap:wrap}.lab-studio{padding:10px}.ref-thumb{width:34px;height:34px}}
 </style></head><body>
-<header><div class="logo">FUSION <b>AI 1.0</b><i>STUDIO DE CRÉATION IA</i></div><nav id="steps"></nav>
-<div class="hb"><span class="chip" id="qchip"></span><button class="sm" data-a="sess">Mes films</button><button class="sm" data-a="con">Journal</button></div></header>
+<header id="fusion-header">
+  <div class="fusion-brand">
+    <div class="fusion-brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M13.2 2.8 5.7 13h5.1l-.3 8.2L18.5 10h-5.1l-.2-7.2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="logo">FUSION <b>AI 1.0</b><i>STUDIO DE CRÉATION IA</i></div>
+  </div>
+  <nav id="steps" aria-label="Étapes de création"></nav>
+  <div class="hb">
+    <span class="chip" id="qchip"></span>
+    <button class="fusion-icon-button" type="button" data-a="portal-search" aria-label="Rechercher un projet" title="Rechercher un projet"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.2 4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+    <button class="fusion-icon-button" type="button" data-a="portal-notifications" aria-label="Activité récente" title="Activité récente"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="fusion-icon-button" type="button" data-a="con" aria-label="Journal technique" title="Journal technique"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16M4 10h16M4 15h10M4 20h7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+  </div>
+</header>
+<div id="fusion-stage" hidden></div>
 <main id="main"></main>
+<nav id="fusion-bottom-nav" aria-label="Navigation principale">
+  <button class="fusion-nav-item" type="button" data-a="portal-route" data-screen="home"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>Accueil</span></button>
+  <button class="fusion-nav-item" type="button" data-a="portal-route" data-screen="gallery"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg><span>Galerie</span></button>
+  <button class="fusion-nav-create" type="button" data-a="portal-create" aria-label="Nouvelle création" title="Nouvelle création"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+  <button class="fusion-nav-item" type="button" data-a="portal-route" data-screen="inspiration"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12.5 2.8c.5 3.1-1.1 4.5-2.1 5.7-1.2 1.4-2.1 2.5-1.7 4.3.3 1.4 1.4 2.3 2.8 2.4-.1-1.7.8-3 2.4-4.2 3.2 2.4 4.2 5 3.2 7.6-.9 2.4-3.1 3.7-6.1 3.7-4.2 0-7-2.7-7-6.7 0-3.1 1.5-5.1 4-7.7 1.7-1.8 3.2-3.2 4.5-5.1Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Idées</span></button>
+  <button class="fusion-nav-item" type="button" data-a="portal-route" data-screen="settings"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M5 20c.7-3.2 3.2-5 7-5s6.3 1.8 7 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Profil</span></button>
+</nav>
 <div id="con"><div style="display:flex;justify-content:space-between;padding:6px 12px;border-bottom:1px solid #26405c;font:12px var(--m)"><span>JOURNAL TECHNIQUE</span><button class="sm" data-a="con" style="color:#bfe3ff;border-color:#4a6a8a">✕</button></div><div id="lb"></div></div>
 <div id="md"><div id="mdc"></div></div><div id="toast"></div>
 <div id="pl"><video id="pv" playsinline style="display:none"></video><img id="pi" alt="" style="display:none"><div id="sub"></div><button data-a="stopplay">✕ Quitter</button></div>
@@ -1463,4 +1483,7 @@ Réponds uniquement avec ce JSON :
 })();
 
 </script>
+<link rel="stylesheet" href="artifacts/fusion-ai-theme/fusion-theme.css">
+<link rel="stylesheet" href="fusion-portal.css">
+<script src="fusion-portal.js"></script>
 </body></html>
